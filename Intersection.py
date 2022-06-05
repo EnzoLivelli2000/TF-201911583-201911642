@@ -15,6 +15,8 @@ class Intersection:
         self.latitudeInter = latitudInter
         self.longitudeInter = longitudeInter
 
+    def getName(self):
+        return self.name
     def getidBeginInter(self):
         return self.idBeginInter
     def getidEndInter(self):
@@ -25,4 +27,8 @@ class Intersection:
         return self.idBeginStreet
     def getIdEndStreet(self):
         return self.idEndStreet
+    def getLatitudeInter(self):
+        return self.latitudeInter
+    def getLongitudeInter(self):
+        return self.longitudeInter
         
