@@ -21,76 +21,13 @@
         }
 
         
-        #loadingBar {
-            position:absolute;
-            top:0px;
-            left:0px;
-            width: 1000px;
-            height: 1000px;
-            background-color:rgba(200,200,200,0.8);
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -ms-transition: all 0.5s ease;
-            -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
-            opacity:1;
-        }
 
-        #bar {
-            position:absolute;
-            top:0px;
-            left:0px;
-            width:20px;
-            height:20px;
-            margin:auto auto auto auto;
-            border-radius:11px;
-            border:2px solid rgba(30,30,30,0.05);
-            background: rgb(0, 173, 246); /* Old browsers */
-            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
-        }
-
-        #border {
-            position:absolute;
-            top:10px;
-            left:10px;
-            width:500px;
-            height:23px;
-            margin:auto auto auto auto;
-            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
-            border-radius:10px;
-        }
-
-        #text {
-            position:absolute;
-            top:8px;
-            left:530px;
-            width:30px;
-            height:50px;
-            margin:auto auto auto auto;
-            font-size:22px;
-            color: #000000;
-        }
-
-        div.outerBorder {
-            position:relative;
-            top:400px;
-            width:600px;
-            height:44px;
-            margin:auto auto auto auto;
-            border:8px solid rgba(0,0,0,0.1);
-            background: rgb(252,252,252); /* Old browsers */
-            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
-            border-radius:72px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-        }
         
-
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
         
 
         
@@ -101,15 +38,8 @@
 <body>
 <div id = "mynetwork"></div>
 
-<div id="loadingBar">
-    <div class="outerBorder">
-        <div id="text">0%</div>
-        <div id="border">
-            <div id="bar"></div>
-        </div>
-    </div>
-</div>
 
+<div id = "config"></div>
 
 <script type="text/javascript">
 
@@ -128,15 +58,18 @@
         
 
         // parsing and collecting nodes and edges from the python
-        nodes = new vis.DataSet([{"id": "1", "label": "1", "shape": "dot"}, {"id": "6", "label": "6", "shape": "dot"}, {"id": "90275", "label": "90275", "shape": "dot"}, {"id": "79", "label": "79", "shape": "dot"}, {"id": "51668", "label": "51668", "shape": "dot"}, {"id": "7", "label": "7", "shape": "dot"}, {"id": "10", "label": "10", "shape": "dot"}, {"id": "89757", "label": "89757", "shape": "dot"}, {"id": "3473", "label": "3473", "shape": "dot"}, {"id": "3472", "label": "3472", "shape": "dot"}, {"id": "2", "label": "2", "shape": "dot"}, {"id": "3", "label": "3", "shape": "dot"}, {"id": "20398", "label": "20398", "shape": "dot"}, {"id": "89758", "label": "89758", "shape": "dot"}, {"id": "25784", "label": "25784", "shape": "dot"}, {"id": "25783", "label": "25783", "shape": "dot"}, {"id": "3456", "label": "3456", "shape": "dot"}, {"id": "10285", "label": "10285", "shape": "dot"}, {"id": "20279", "label": "20279", "shape": "dot"}, {"id": "2996", "label": "2996", "shape": "dot"}, {"id": "61002", "label": "61002", "shape": "dot"}, {"id": "51747", "label": "51747", "shape": "dot"}, {"id": "93140", "label": "93140", "shape": "dot"}, {"id": "90309", "label": "90309", "shape": "dot"}, {"id": "10593", "label": "10593", "shape": "dot"}, {"id": "20265", "label": "20265", "shape": "dot"}, {"id": "9", "label": "9", "shape": "dot"}, {"id": "90834", "label": "90834", "shape": "dot"}, {"id": "90833", "label": "90833", "shape": "dot"}, {"id": "51748", "label": "51748", "shape": "dot"}, {"id": "10284", "label": "10284", "shape": "dot"}, {"id": "20140", "label": "20140", "shape": "dot"}, {"id": "20106", "label": "20106", "shape": "dot"}, {"id": "10287", "label": "10287", "shape": "dot"}, {"id": "20101", "label": "20101", "shape": "dot"}, {"id": "20107", "label": "20107", "shape": "dot"}, {"id": "20136", "label": "20136", "shape": "dot"}, {"id": "20131", "label": "20131", "shape": "dot"}, {"id": "11", "label": "11", "shape": "dot"}, {"id": "65165", "label": "65165", "shape": "dot"}, {"id": "26831", "label": "26831", "shape": "dot"}, {"id": "37013", "label": "37013", "shape": "dot"}, {"id": "13", "label": "13", "shape": "dot"}, {"id": "16", "label": "16", "shape": "dot"}, {"id": "17", "label": "17", "shape": "dot"}, {"id": "93168", "label": "93168", "shape": "dot"}, {"id": "8", "label": "8", "shape": "dot"}, {"id": "3765", "label": "3765", "shape": "dot"}, {"id": "12773", "label": "12773", "shape": "dot"}, {"id": "3451", "label": "3451", "shape": "dot"}, {"id": "91660", "label": "91660", "shape": "dot"}, {"id": "91696", "label": "91696", "shape": "dot"}, {"id": "3725", "label": "3725", "shape": "dot"}, {"id": "3726", "label": "3726", "shape": "dot"}, {"id": "3729", "label": "3729", "shape": "dot"}, {"id": "231", "label": "231", "shape": "dot"}, {"id": "230", "label": "230", "shape": "dot"}, {"id": "20253", "label": "20253", "shape": "dot"}, {"id": "12", "label": "12", "shape": "dot"}, {"id": "22", "label": "22", "shape": "dot"}, {"id": "19", "label": "19", "shape": "dot"}, {"id": "20", "label": "20", "shape": "dot"}, {"id": "18", "label": "18", "shape": "dot"}, {"id": "39036", "label": "39036", "shape": "dot"}, {"id": "24", "label": "24", "shape": "dot"}, {"id": "33935", "label": "33935", "shape": "dot"}, {"id": "20381", "label": "20381", "shape": "dot"}, {"id": "20480", "label": "20480", "shape": "dot"}, {"id": "20423", "label": "20423", "shape": "dot"}, {"id": "20540", "label": "20540", "shape": "dot"}, {"id": "90804", "label": "90804", "shape": "dot"}, {"id": "20429", "label": "20429", "shape": "dot"}, {"id": "31230", "label": "31230", "shape": "dot"}, {"id": "40035", "label": "40035", "shape": "dot"}, {"id": "20930", "label": "20930", "shape": "dot"}, {"id": "20861", "label": "20861", "shape": "dot"}, {"id": "42858", "label": "42858", "shape": "dot"}, {"id": "94628", "label": "94628", "shape": "dot"}, {"id": "20907", "label": "20907", "shape": "dot"}, {"id": "31491", "label": "31491", "shape": "dot"}, {"id": "94637", "label": "94637", "shape": "dot"}, {"id": "35587", "label": "35587", "shape": "dot"}, {"id": "20939", "label": "20939", "shape": "dot"}, {"id": "20887", "label": "20887", "shape": "dot"}, {"id": "20220", "label": "20220", "shape": "dot"}, {"id": "20889", "label": "20889", "shape": "dot"}, {"id": "20872", "label": "20872", "shape": "dot"}, {"id": "20867", "label": "20867", "shape": "dot"}, {"id": "20525", "label": "20525", "shape": "dot"}, {"id": "20822", "label": "20822", "shape": "dot"}, {"id": "20825", "label": "20825", "shape": "dot"}, {"id": "40566", "label": "40566", "shape": "dot"}, {"id": "20912", "label": "20912", "shape": "dot"}, {"id": "26", "label": "26", "shape": "dot"}, {"id": "29", "label": "29", "shape": "dot"}, {"id": "30610", "label": "30610", "shape": "dot"}, {"id": "21", "label": "21", "shape": "dot"}, {"id": "94626", "label": "94626", "shape": "dot"}, {"id": "32", "label": "32", "shape": "dot"}, {"id": "57685", "label": "57685", "shape": "dot"}, {"id": "41", "label": "41", "shape": "dot"}, {"id": "57686", "label": "57686", "shape": "dot"}, {"id": "43", "label": "43", "shape": "dot"}, {"id": "45", "label": "45", "shape": "dot"}, {"id": "19867", "label": "19867", "shape": "dot"}, {"id": "44550", "label": "44550", "shape": "dot"}, {"id": "19846", "label": "19846", "shape": "dot"}, {"id": "38658", "label": "38658", "shape": "dot"}, {"id": "19878", "label": "19878", "shape": "dot"}, {"id": "47", "label": "47", "shape": "dot"}, {"id": "35", "label": "35", "shape": "dot"}, {"id": "46", "label": "46", "shape": "dot"}, {"id": "19837", "label": "19837", "shape": "dot"}, {"id": "19826", "label": "19826", "shape": "dot"}, {"id": "19855", "label": "19855", "shape": "dot"}, {"id": "19822", "label": "19822", "shape": "dot"}, {"id": "20000", "label": "20000", "shape": "dot"}, {"id": "19939", "label": "19939", "shape": "dot"}, {"id": "90861", "label": "90861", "shape": "dot"}, {"id": "50", "label": "50", "shape": "dot"}, {"id": "10610", "label": "10610", "shape": "dot"}, {"id": "49", "label": "49", "shape": "dot"}, {"id": "87469", "label": "87469", "shape": "dot"}, {"id": "88515", "label": "88515", "shape": "dot"}, {"id": "88582", "label": "88582", "shape": "dot"}, {"id": "88396", "label": "88396", "shape": "dot"}, {"id": "88586", "label": "88586", "shape": "dot"}, {"id": "88393", "label": "88393", "shape": "dot"}, {"id": "88702", "label": "88702", "shape": "dot"}, {"id": "88379", "label": "88379", "shape": "dot"}, {"id": "88634", "label": "88634", "shape": "dot"}, {"id": "87684", "label": "87684", "shape": "dot"}, {"id": "87661", "label": "87661", "shape": "dot"}, {"id": "87486", "label": "87486", "shape": "dot"}, {"id": "87468", "label": "87468", "shape": "dot"}, {"id": "87678", "label": "87678", "shape": "dot"}, {"id": "87628", "label": "87628", "shape": "dot"}, {"id": "87697", "label": "87697", "shape": "dot"}, {"id": "19856", "label": "19856", "shape": "dot"}, {"id": "19834", "label": "19834", "shape": "dot"}, {"id": "44974", "label": "44974", "shape": "dot"}, {"id": "87627", "label": "87627", "shape": "dot"}, {"id": "87535", "label": "87535", "shape": "dot"}, {"id": "87363", "label": "87363", "shape": "dot"}, {"id": "86996", "label": "86996", "shape": "dot"}, {"id": "87400", "label": "87400", "shape": "dot"}, {"id": "87205", "label": "87205", "shape": "dot"}, {"id": "87128", "label": "87128", "shape": "dot"}, {"id": "87127", "label": "87127", "shape": "dot"}, {"id": "87255", "label": "87255", "shape": "dot"}, {"id": "94659", "label": "94659", "shape": "dot"}, {"id": "86963", "label": "86963", "shape": "dot"}, {"id": "10608", "label": "10608", "shape": "dot"}, {"id": "88767", "label": "88767", "shape": "dot"}, {"id": "88746", "label": "88746", "shape": "dot"}, {"id": "79107", "label": "79107", "shape": "dot"}, {"id": "15802", "label": "15802", "shape": "dot"}, {"id": "15801", "label": "15801", "shape": "dot"}, {"id": "15842", "label": "15842", "shape": "dot"}, {"id": "15849", "label": "15849", "shape": "dot"}, {"id": "21973", "label": "21973", "shape": "dot"}, {"id": "22092", "label": "22092", "shape": "dot"}, {"id": "22082", "label": "22082", "shape": "dot"}, {"id": "90559", "label": "90559", "shape": "dot"}, {"id": "22396", "label": "22396", "shape": "dot"}, {"id": "95818", "label": "95818", "shape": "dot"}, {"id": "90863", "label": "90863", "shape": "dot"}, {"id": "15621", "label": "15621", "shape": "dot"}, {"id": "90864", "label": "90864", "shape": "dot"}, {"id": "13433", "label": "13433", "shape": "dot"}, {"id": "13427", "label": "13427", "shape": "dot"}, {"id": "15336", "label": "15336", "shape": "dot"}, {"id": "13450", "label": "13450", "shape": "dot"}, {"id": "90851", "label": "90851", "shape": "dot"}, {"id": "57691", "label": "57691", "shape": "dot"}, {"id": "90857", "label": "90857", "shape": "dot"}, {"id": "90854", "label": "90854", "shape": "dot"}, {"id": "51", "label": "51", "shape": "dot"}, {"id": "19760", "label": "19760", "shape": "dot"}, {"id": "19861", "label": "19861", "shape": "dot"}, {"id": "19869", "label": "19869", "shape": "dot"}, {"id": "19871", "label": "19871", "shape": "dot"}, {"id": "38587", "label": "38587", "shape": "dot"}, {"id": "25121", "label": "25121", "shape": "dot"}, {"id": "19862", "label": "19862", "shape": "dot"}, {"id": "19842", "label": "19842", "shape": "dot"}, {"id": "19850", "label": "19850", "shape": "dot"}, {"id": "19877", "label": "19877", "shape": "dot"}, {"id": "19883", "label": "19883", "shape": "dot"}, {"id": "19841", "label": "19841", "shape": "dot"}, {"id": "19954", "label": "19954", "shape": "dot"}, {"id": "19997", "label": "19997", "shape": "dot"}, {"id": "50269", "label": "50269", "shape": "dot"}, {"id": "50223", "label": "50223", "shape": "dot"}, {"id": "19967", "label": "19967", "shape": "dot"}, {"id": "90862", "label": "90862", "shape": "dot"}]);
-        edges = new vis.DataSet([{"from": "1", "to": "6", "weight": 0.87}, {"from": "6", "to": "90275", "weight": 0.87}, {"from": "90275", "to": "79", "weight": 0.87}, {"from": "79", "to": "51668", "weight": 0.87}, {"from": "51668", "to": "7", "weight": 0.87}, {"from": "7", "to": "10", "weight": 0.87}, {"from": "10", "to": "89757", "weight": 0.87}, {"from": "89757", "to": "3473", "weight": 0.87}, {"from": "3473", "to": "3472", "weight": 0.87}, {"from": "3472", "to": "2", "weight": 0.87}, {"from": "2", "to": "1", "weight": 0.87}, {"from": "7", "to": "20398", "weight": 0.87}, {"from": "20398", "to": "89758", "weight": 0.87}, {"from": "89758", "to": "25784", "weight": 0.87}, {"from": "25784", "to": "25783", "weight": 0.87}, {"from": "25783", "to": "3456", "weight": 0.87}, {"from": "3456", "to": "10285", "weight": 0.87}, {"from": "10285", "to": "20279", "weight": 0.87}, {"from": "20279", "to": "2996", "weight": 0.87}, {"from": "2996", "to": "61002", "weight": 0.87}, {"from": "61002", "to": "51747", "weight": 0.87}, {"from": "51747", "to": "93140", "weight": 0.87}, {"from": "93140", "to": "90309", "weight": 0.87}, {"from": "90309", "to": "10593", "weight": 0.87}, {"from": "10593", "to": "20265", "weight": 0.87}, {"from": "20265", "to": "8", "weight": 0.87}, {"from": "9", "to": "90834", "weight": 0.87}, {"from": "90834", "to": "90833", "weight": 0.87}, {"from": "90833", "to": "51748", "weight": 0.87}, {"from": "51748", "to": "10284", "weight": 0.87}, {"from": "10284", "to": "20140", "weight": 0.87}, {"from": "20140", "to": "20106", "weight": 0.87}, {"from": "20106", "to": "10287", "weight": 0.87}, {"from": "10287", "to": "20101", "weight": 0.87}, {"from": "20101", "to": "20107", "weight": 0.87}, {"from": "20107", "to": "20136", "weight": 0.87}, {"from": "20136", "to": "20131", "weight": 0.87}, {"from": "20131", "to": "10", "weight": 0.87}, {"from": "11", "to": "65165", "weight": 0.87}, {"from": "65165", "to": "26831", "weight": 0.87}, {"from": "26831", "to": "37013", "weight": 0.87}, {"from": "37013", "to": "12", "weight": 0.87}, {"from": "16", "to": "12", "weight": 0.87}, {"from": "17", "to": "93168", "weight": 0.87}, {"from": "93168", "to": "8", "weight": 0.87}, {"from": "8", "to": "3765", "weight": 0.87}, {"from": "3765", "to": "12773", "weight": 0.87}, {"from": "12773", "to": "3451", "weight": 0.87}, {"from": "3451", "to": "91660", "weight": 0.87}, {"from": "91660", "to": "91696", "weight": 0.87}, {"from": "91696", "to": "3725", "weight": 0.87}, {"from": "3725", "to": "3726", "weight": 0.87}, {"from": "3726", "to": "3729", "weight": 0.87}, {"from": "3729", "to": "231", "weight": 0.87}, {"from": "231", "to": "230", "weight": 0.87}, {"from": "230", "to": "20253", "weight": 0.87}, {"from": "20253", "to": "9", "weight": 0.87}, {"from": "9", "to": "17", "weight": 0.87}, {"from": "12", "to": "22", "weight": 0.87}, {"from": "22", "to": "18", "weight": 0.87}, {"from": "19", "to": "20", "weight": 0.87}, {"from": "20", "to": "13", "weight": 0.87}, {"from": "18", "to": "21", "weight": 0.87}, {"from": "22", "to": "39036", "weight": 0.87}, {"from": "39036", "to": "24", "weight": 0.87}, {"from": "24", "to": "33935", "weight": 0.87}, {"from": "33935", "to": "20381", "weight": 0.87}, {"from": "20381", "to": "20480", "weight": 0.87}, {"from": "20480", "to": "20423", "weight": 0.87}, {"from": "20423", "to": "20540", "weight": 0.87}, {"from": "20540", "to": "90804", "weight": 0.87}, {"from": "90804", "to": "20429", "weight": 0.87}, {"from": "20429", "to": "31230", "weight": 0.87}, {"from": "31230", "to": "40035", "weight": 0.87}, {"from": "40035", "to": "20930", "weight": 0.87}, {"from": "20930", "to": "20861", "weight": 0.87}, {"from": "20861", "to": "42858", "weight": 0.87}, {"from": "42858", "to": "94628", "weight": 0.87}, {"from": "94628", "to": "20907", "weight": 0.87}, {"from": "20907", "to": "31491", "weight": 0.87}, {"from": "31491", "to": "94637", "weight": 0.87}, {"from": "94637", "to": "35587", "weight": 0.87}, {"from": "35587", "to": "20939", "weight": 0.87}, {"from": "20939", "to": "20887", "weight": 0.87}, {"from": "20887", "to": "20220", "weight": 0.87}, {"from": "20220", "to": "20889", "weight": 0.87}, {"from": "20889", "to": "20872", "weight": 0.87}, {"from": "20872", "to": "20867", "weight": 0.87}, {"from": "20867", "to": "20525", "weight": 0.87}, {"from": "20525", "to": "20822", "weight": 0.87}, {"from": "20822", "to": "20825", "weight": 0.87}, {"from": "20825", "to": "40566", "weight": 0.87}, {"from": "40566", "to": "20912", "weight": 0.87}, {"from": "26", "to": "29", "weight": 0.87}, {"from": "29", "to": "30610", "weight": 0.87}, {"from": "21", "to": "94626", "weight": 0.87}, {"from": "94626", "to": "32", "weight": 0.87}, {"from": "57685", "to": "57686", "weight": 0.87}, {"from": "41", "to": "57685", "weight": 0.87}, {"from": "45", "to": "19867", "weight": 0.87}, {"from": "19867", "to": "44550", "weight": 0.87}, {"from": "44550", "to": "19846", "weight": 0.87}, {"from": "19846", "to": "38658", "weight": 0.87}, {"from": "38658", "to": "19878", "weight": 0.87}, {"from": "19878", "to": "46", "weight": 0.87}, {"from": "47", "to": "35", "weight": 0.87}, {"from": "35", "to": "46", "weight": 0.87}, {"from": "46", "to": "19837", "weight": 0.87}, {"from": "19837", "to": "19826", "weight": 0.87}, {"from": "19826", "to": "19855", "weight": 0.87}, {"from": "19855", "to": "19822", "weight": 0.87}, {"from": "19822", "to": "20000", "weight": 0.87}, {"from": "20000", "to": "19939", "weight": 0.87}, {"from": "19939", "to": "90861", "weight": 0.87}, {"from": "90861", "to": "50", "weight": 0.87}, {"from": "10610", "to": "10608", "weight": 0.87}, {"from": "49", "to": "87469", "weight": 0.87}, {"from": "87469", "to": "88515", "weight": 0.87}, {"from": "88515", "to": "88582", "weight": 0.87}, {"from": "88582", "to": "88396", "weight": 0.87}, {"from": "88396", "to": "88586", "weight": 0.87}, {"from": "88586", "to": "88393", "weight": 0.87}, {"from": "88393", "to": "88702", "weight": 0.87}, {"from": "88702", "to": "88379", "weight": 0.87}, {"from": "88379", "to": "88634", "weight": 0.87}, {"from": "88634", "to": "87684", "weight": 0.87}, {"from": "87684", "to": "87661", "weight": 0.87}, {"from": "87661", "to": "87486", "weight": 0.87}, {"from": "87486", "to": "87468", "weight": 0.87}, {"from": "87468", "to": "87678", "weight": 0.87}, {"from": "87678", "to": "87628", "weight": 0.87}, {"from": "87628", "to": "87697", "weight": 0.87}, {"from": "87697", "to": "87627", "weight": 0.87}, {"from": "19856", "to": "19834", "weight": 0.87}, {"from": "19834", "to": "44974", "weight": 0.87}, {"from": "44974", "to": "19862", "weight": 0.87}, {"from": "87627", "to": "87535", "weight": 0.87}, {"from": "87535", "to": "87363", "weight": 0.87}, {"from": "87363", "to": "86996", "weight": 0.87}, {"from": "86996", "to": "87400", "weight": 0.87}, {"from": "87400", "to": "87205", "weight": 0.87}, {"from": "87205", "to": "87128", "weight": 0.87}, {"from": "87128", "to": "87127", "weight": 0.87}, {"from": "87127", "to": "87255", "weight": 0.87}, {"from": "87255", "to": "94659", "weight": 0.87}, {"from": "94659", "to": "86963", "weight": 0.87}, {"from": "86963", "to": "10610", "weight": 0.87}, {"from": "10608", "to": "88767", "weight": 0.87}, {"from": "88767", "to": "88746", "weight": 0.87}, {"from": "88746", "to": "79107", "weight": 0.87}, {"from": "79107", "to": "15802", "weight": 0.87}, {"from": "15802", "to": "15801", "weight": 0.87}, {"from": "15801", "to": "15842", "weight": 0.87}, {"from": "15842", "to": "15849", "weight": 0.87}, {"from": "15849", "to": "21973", "weight": 0.87}, {"from": "21973", "to": "22092", "weight": 0.87}, {"from": "22092", "to": "22082", "weight": 0.87}, {"from": "22082", "to": "90559", "weight": 0.87}, {"from": "90559", "to": "22396", "weight": 0.87}, {"from": "95818", "to": "90863", "weight": 0.87}, {"from": "90863", "to": "15621", "weight": 0.87}, {"from": "15621", "to": "90864", "weight": 0.87}, {"from": "90864", "to": "13433", "weight": 0.87}, {"from": "13433", "to": "13427", "weight": 0.87}, {"from": "13427", "to": "15336", "weight": 0.87}, {"from": "15336", "to": "13450", "weight": 0.87}, {"from": "13450", "to": "90851", "weight": 0.87}, {"from": "90851", "to": "57691", "weight": 0.87}, {"from": "57691", "to": "90857", "weight": 0.87}, {"from": "90857", "to": "90854", "weight": 0.87}, {"from": "90854", "to": "50", "weight": 0.87}, {"from": "51", "to": "19760", "weight": 0.87}, {"from": "19760", "to": "19861", "weight": 0.87}, {"from": "19861", "to": "19869", "weight": 0.87}, {"from": "19869", "to": "19871", "weight": 0.87}, {"from": "19871", "to": "38587", "weight": 0.87}, {"from": "38587", "to": "25121", "weight": 0.87}, {"from": "25121", "to": "19856", "weight": 0.87}, {"from": "19862", "to": "19842", "weight": 0.87}, {"from": "19842", "to": "19850", "weight": 0.87}, {"from": "19850", "to": "19877", "weight": 0.87}, {"from": "19877", "to": "19883", "weight": 0.87}, {"from": "19883", "to": "19841", "weight": 0.87}, {"from": "19841", "to": "19954", "weight": 0.87}, {"from": "19954", "to": "19997", "weight": 0.87}, {"from": "19997", "to": "50269", "weight": 0.87}, {"from": "50269", "to": "50223", "weight": 0.87}, {"from": "50223", "to": "19967", "weight": 0.87}, {"from": "50", "to": "90862", "weight": 0.87}]);
+        nodes = new vis.DataSet([{"id": "1", "label": "1", "shape": "dot"}, {"id": "6", "label": "6", "shape": "dot"}, {"id": "90275", "label": "90275", "shape": "dot"}, {"id": "79", "label": "79", "shape": "dot"}, {"id": "51668", "label": "51668", "shape": "dot"}, {"id": "7", "label": "7", "shape": "dot"}, {"id": "10", "label": "10", "shape": "dot"}, {"id": "89757", "label": "89757", "shape": "dot"}, {"id": "3473", "label": "3473", "shape": "dot"}, {"id": "3472", "label": "3472", "shape": "dot"}, {"id": "2", "label": "2", "shape": "dot"}, {"id": "3", "label": "3", "shape": "dot"}, {"id": "20398", "label": "20398", "shape": "dot"}, {"id": "89758", "label": "89758", "shape": "dot"}, {"id": "25784", "label": "25784", "shape": "dot"}, {"id": "25783", "label": "25783", "shape": "dot"}, {"id": "3456", "label": "3456", "shape": "dot"}, {"id": "10285", "label": "10285", "shape": "dot"}, {"id": "20279", "label": "20279", "shape": "dot"}, {"id": "2996", "label": "2996", "shape": "dot"}, {"id": "61002", "label": "61002", "shape": "dot"}, {"id": "51747", "label": "51747", "shape": "dot"}, {"id": "93140", "label": "93140", "shape": "dot"}, {"id": "90309", "label": "90309", "shape": "dot"}, {"id": "10593", "label": "10593", "shape": "dot"}, {"id": "20265", "label": "20265", "shape": "dot"}, {"id": "9", "label": "9", "shape": "dot"}, {"id": "90834", "label": "90834", "shape": "dot"}, {"id": "90833", "label": "90833", "shape": "dot"}, {"id": "51748", "label": "51748", "shape": "dot"}, {"id": "10284", "label": "10284", "shape": "dot"}, {"id": "20140", "label": "20140", "shape": "dot"}, {"id": "20106", "label": "20106", "shape": "dot"}, {"id": "10287", "label": "10287", "shape": "dot"}, {"id": "20101", "label": "20101", "shape": "dot"}, {"id": "20107", "label": "20107", "shape": "dot"}, {"id": "20136", "label": "20136", "shape": "dot"}, {"id": "20131", "label": "20131", "shape": "dot"}, {"id": "11", "label": "11", "shape": "dot"}, {"id": "65165", "label": "65165", "shape": "dot"}, {"id": "26831", "label": "26831", "shape": "dot"}, {"id": "37013", "label": "37013", "shape": "dot"}, {"id": "13", "label": "13", "shape": "dot"}, {"id": "16", "label": "16", "shape": "dot"}, {"id": "17", "label": "17", "shape": "dot"}, {"id": "93168", "label": "93168", "shape": "dot"}, {"id": "8", "label": "8", "shape": "dot"}, {"id": "3765", "label": "3765", "shape": "dot"}, {"id": "12773", "label": "12773", "shape": "dot"}, {"id": "3451", "label": "3451", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": "1", "to": "6", "weight": 0.87}, {"from": "6", "to": "90275", "weight": 0.87}, {"from": "90275", "to": "79", "weight": 0.87}, {"from": "79", "to": "51668", "weight": 0.87}, {"from": "51668", "to": "7", "weight": 0.87}, {"from": "7", "to": "10", "weight": 0.87}, {"from": "10", "to": "89757", "weight": 0.87}, {"from": "89757", "to": "3473", "weight": 0.87}, {"from": "3473", "to": "3472", "weight": 0.87}, {"from": "3472", "to": "2", "weight": 0.87}, {"from": "2", "to": "1", "weight": 0.87}, {"from": "7", "to": "20398", "weight": 0.87}, {"from": "20398", "to": "89758", "weight": 0.87}, {"from": "89758", "to": "25784", "weight": 0.87}, {"from": "25784", "to": "25783", "weight": 0.87}, {"from": "25783", "to": "3456", "weight": 0.87}, {"from": "3456", "to": "10285", "weight": 0.87}, {"from": "10285", "to": "20279", "weight": 0.87}, {"from": "20279", "to": "2996", "weight": 0.87}, {"from": "2996", "to": "61002", "weight": 0.87}, {"from": "61002", "to": "51747", "weight": 0.87}, {"from": "51747", "to": "93140", "weight": 0.87}, {"from": "93140", "to": "90309", "weight": 0.87}, {"from": "90309", "to": "10593", "weight": 0.87}, {"from": "10593", "to": "20265", "weight": 0.87}, {"from": "20265", "to": "8", "weight": 0.87}, {"from": "9", "to": "90834", "weight": 0.87}, {"from": "90834", "to": "90833", "weight": 0.87}, {"from": "90833", "to": "51748", "weight": 0.87}, {"from": "51748", "to": "10284", "weight": 0.87}, {"from": "10284", "to": "20140", "weight": 0.87}, {"from": "20140", "to": "20106", "weight": 0.87}, {"from": "20106", "to": "10287", "weight": 0.87}, {"from": "10287", "to": "20101", "weight": 0.87}, {"from": "20101", "to": "20107", "weight": 0.87}, {"from": "20107", "to": "20136", "weight": 0.87}, {"from": "20136", "to": "20131", "weight": 0.87}, {"from": "20131", "to": "10", "weight": 0.87}, {"from": "11", "to": "65165", "weight": 0.87}, {"from": "65165", "to": "26831", "weight": 0.87}, {"from": "26831", "to": "37013", "weight": 0.87}, {"from": "17", "to": "93168", "weight": 0.87}, {"from": "93168", "to": "8", "weight": 0.87}, {"from": "8", "to": "3765", "weight": 0.87}, {"from": "3765", "to": "12773", "weight": 0.87}, {"from": "12773", "to": "3451", "weight": 0.87}]);
 
         // adding nodes and edges to the graph
         data = {nodes: nodes, edges: edges};
 
         var options = {
     "configure": {
-        "enabled": false
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
     },
     "edges": {
         "color": {
@@ -167,30 +100,16 @@
         
 
         
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
 
         network = new vis.Network(container, data, options);
 	 
         
 
 
-        
-        network.on("stabilizationProgress", function(params) {
-      		document.getElementById('loadingBar').removeAttribute("style");
-	        var maxWidth = 496;
-	        var minWidth = 20;
-	        var widthFactor = params.iterations/params.total;
-	        var width = Math.max(minWidth,maxWidth * widthFactor);
-
-	        document.getElementById('bar').style.width = width + 'px';
-	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
-	    });
-	    network.once("stabilizationIterationsDone", function() {
-	        document.getElementById('text').innerHTML = '100%';
-	        document.getElementById('bar').style.width = '496px';
-	        document.getElementById('loadingBar').style.opacity = 0;
-	        // really clean the dom element
-	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
-	    });
         
 
         return network;
