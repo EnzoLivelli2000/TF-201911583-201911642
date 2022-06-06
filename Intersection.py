@@ -6,7 +6,7 @@ class Intersection:
         self.idEndStreet = idEndStreet
         self.idBeginInter = idBeginInter
         self.idEndInter = idEndInter
-        self.sitance = distance
+        self.distance = distance
         self.velocity = velocity
         self.cost1 = cost1
         self.cost2 = cost2
@@ -31,4 +31,6 @@ class Intersection:
         return self.latitudeInter
     def getLongitudeInter(self):
         return self.longitudeInter
+    def getDistance(self):
+        return self.distance
         
