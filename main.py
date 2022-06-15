@@ -14,7 +14,7 @@ with open("Lima-intersecciones.csv", "r", encoding="utf8") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     cont = 0
     for line in csv_reader:
-        if cont > 15:
+        if cont > 50:
             break
         else:
             intersection = Intersection(line[1], line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12],line[13],line[14])
@@ -26,17 +26,16 @@ listAdjacency = []
 listWeights = []
 for i in list_intersections:
     list = []
-    list.append(i.getidBeginInter())
-    list.append(i.getidEndInter())
-    listWeights.append(i.getDistance()) 
-    listAdjacency.append(list)
-
+    list.append(i.getidBeginInter()) # 1
+    list.append(i.getidEndInter()) # 6
+    listWeights.append(i.getDistance()) #  
+    listAdjacency.append(list) # [[1,6], [6, 90275]], 
 print(listAdjacency)
  
 
 # Now create graph
 graph = Network("1000px", "1000px", directed = True)
-graph2 =nx.Graph()
+#graph2 =nx.Graph()
 
 
 colorGenerate = ""
@@ -56,8 +55,9 @@ for i in range(len(list_intersections)):
         idBefore = list_intersections[i].getId()
         colorGenerate = colorRandom
     # Insert Nodes
-    graph.add_node(list_intersections[i].getidBeginInter(), label = list_intersections[i].getidBeginInter(), x= list_intersections[i].getLatitudeInter(), y = list_intersections[i].getLongitudeInter(), title =list_intersections[i].getName(), color = colorRandom)
-    list_added.append(list_intersections[i].getidBeginInter())
+    if not (list_intersections[i].getidBeginInter() in list_added):
+        graph.add_node(list_intersections[i].getidBeginInter(), label = list_intersections[i].getidBeginInter(), x= list_intersections[i].getLatitudeInter(), y = list_intersections[i].getLongitudeInter(), title =list_intersections[i].getName(), color = colorRandom)
+        list_added.append(list_intersections[i].getidBeginInter())
 
     if not (list_intersections[i].getidEndInter() in list_added):
         graph.add_node(list_intersections[i].getidEndInter(), label = list_intersections[i].getidEndInter(), x= list_intersections[i].getLatitudeInter(), y = list_intersections[i].getLongitudeInter(), title =list_intersections[i].getName(), color = colorRandom)
@@ -65,14 +65,8 @@ for i in range(len(list_intersections)):
 
 
 # Add edges
-print(len(listAdjacency))
-print(len(listWeights))
-print(listAdjacency)
-print(listWeights)
-
 for i in range(len(listAdjacency)):
     graph.add_edge(listAdjacency[i][0], listAdjacency[i][1], weight = 100, title = listWeights[i])
-
 # Draw graph
 
 #pos = nx.get_edge_attributes(graph2, "pos")
