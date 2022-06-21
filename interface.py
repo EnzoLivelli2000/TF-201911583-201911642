@@ -3,12 +3,12 @@ from tkinter import *
 def return_main(): 
     windowCredits.destroy()
     opened = False
-    main()
+    printMenu()
 
 def return_main_2():
     windowMain.destroy()
     opened = False
-    main()
+    printMenu()
 
 def openCredits():
     global opened, windowCredits
@@ -44,7 +44,7 @@ def openMainApp():
         buttonBack2 = Button(windowMain, text = "Regresar", font = ("Cooper Black", 12), width= 8, height = 2, command=return_main_2)
         buttonBack2.place(x = 20, y = 220)
 
-def main():
+def printMenu():
     # Create windowHome Home
     global windowHome
     windowHome = Tk()  
@@ -68,4 +68,4 @@ def main():
     windowHome.mainloop()  # call mainloop only for main
 
 opened = False 
-main()
+printMenu()
