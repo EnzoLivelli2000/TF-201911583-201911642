@@ -17,9 +17,9 @@ class Intersection:
 
     def getName(self):
         return self.name
-    def getidBeginInter(self):
+    def getIdBeginInter(self):
         return self.idBeginInter
-    def getidEndInter(self):
+    def getIdEndInter(self):
         return self.idEndInter
     def getId(self):
         return self.id
