@@ -1,15 +1,14 @@
 import csv
+from matplotlib.pyplot import draw
+from nbformat import read
 from Intersection import Intersection
 import networkx as nx
 import pylab
-import dijkstra
-import random
 import helpers
-
+from pyvis.network import *
 
 def readData(numNodes):
     list_intersections = []
-    dictionaryIdCoordinates = {}
     # Read intersections
     with open("./data/Lima-intersecciones.csv", "r", encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
@@ -20,7 +19,6 @@ def readData(numNodes):
             else:
                 intersection = Intersection(line[1], line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10],line[11],line[12],line[13],line[14])
                 list_intersections.append(intersection)
-                dictionaryIdCoordinates[int(line[5])] = [float(line[13]), float(line[14])]
                 cont += 1
     return list_intersections
 
@@ -33,35 +31,38 @@ def createListAdjacency(numNodes):
         tuple = (i.getIdBeginInter(), i.getIdEndInter())
         listWeights.append(i.getDistance()) #  
         listAdjacency.append(tuple) # [[1,6], [6, 90275]], 
+        
     return list_intersections, listAdjacency
+
+def getWeightsEdges(numNodes):
+    list_intersections = readData(numNodes)
+    weights = []
+    # Calculate weight
+    for i in range(len(list_intersections)):
+        distance = helpers.calculateDistanceBetweenTwoNodes(float(list_intersections[i].getLatitudeBeginInter()),float(list_intersections[i].getLongitudeBeginInter()),float(list_intersections[i].getLatitudeEndInter()),float(list_intersections[i].getLongitudeEndInter()))
+        weights.append(distance)
+    return weights
+
 
 def createGraph(numNodes):
     # Create the graph
     list_intersections, listAdjacency = createListAdjacency(numNodes)
+    weights = getWeightsEdges(numNodes)
     graph =  nx.Graph()
 
     # Add Nodes
     for i in list_intersections:
-        graph.add_node(int(i.getIdBeginInter()), latitude =  i.getLatitudeInter(), longitude =  i.getLongitudeInter())
-
-
-    weights = []
-    # # Calculate weight
-    # for i in range(len(list_intersections) - 1):
-    #     distance = helpers.calculateDistanceBetweenTwoNodes(int(list_intersections[i].getLatitudeInter()),int(list_intersections[i].getLongitudeInter()), int(list_intersections[i + 1].getLatitudeInter()),int(list_intersections[i].getLongitudeInter()))
+        graph.add_node(int(i.getIdBeginInter()), id = i.getIdBeginInter(), latitudeBegin =  i.getLatitudeBeginInter(), longitudeBegin =  i.getLongitudeBeginInter(), latitudeEnd =  i.getLatitudeEndInter(), longitudeEnd =  i.getLongitudeEndInter())
 
     #  Add Edges
     #graph.add_edges_from(listAdjacency)
     for i in range(len(listAdjacency)):
-        graph.add_edge(int(listAdjacency[i][0]), int(listAdjacency[i][1]), weight = random.randint(1,50))
+        graph.add_edge(int(listAdjacency[i][0]), int(listAdjacency[i][1]), weight = weights[i])
 
     return graph
 
-# path = nx.shortest_path(graph, source = 1, target = 79, weight = "weight")
-# length = nx.shortest_path_length(graph, source = 1, target = 79, weight = "weight")
-# print(path, length)
 
-def drawGraph(numNodes):
+def drawGraphOne(numNodes):
     graph = createGraph(numNodes)
     # Draw Graph
     pos = nx.spring_layout(graph)
@@ -76,5 +77,39 @@ def drawGraph(numNodes):
     # Dhow graph
     pylab.show()
 
+def drawGraphTwo(numNodes):
+    list_intersections, listAdjacency = createListAdjacency(numNodes)
+    weights = getWeightsEdges(numNodes)
+    # Now create graph
+    graph = Network("1000px", "1000px", directed = True)
 
-readData(10)
+    colorGenerate = ""
+    idBefore = 0
+
+    list_added = []
+
+    # Add node
+    for i in range(len(list_intersections)):
+        colorRandom = helpers.random_color()
+        if colorGenerate == "":
+            colorGenerate = colorRandom
+            idBefore = list_intersections[i].getId()
+        elif idBefore == list_intersections[i].getId() and i > 0:
+            colorRandom = colorGenerate
+        else:
+            idBefore = list_intersections[i].getId()
+            colorGenerate = colorRandom
+        # Insert Nodes
+        if not (list_intersections[i].getIdBeginInter() in list_added):
+            graph.add_node(list_intersections[i].getIdBeginInter(), label = list_intersections[i].getIdBeginInter(), title =list_intersections[i].getName(), color = colorRandom)
+            list_added.append(list_intersections[i].getIdBeginInter())
+
+        if not (list_intersections[i].getIdEndInter() in list_added):
+            graph.add_node(list_intersections[i].getIdEndInter(), label = list_intersections[i].getIdEndInter(), title =list_intersections[i].getName(), color = colorRandom)
+            list_added.append(list_intersections[i].getIdEndInter())
+    # # Add edges
+    for i in range(len(listAdjacency)):
+        graph.add_edge(listAdjacency[i][0], listAdjacency[i][1], title = weights[i])
+    # Draw graph
+    graph.show_buttons(filter_=["physics"])
+    graph.show("lima.html")

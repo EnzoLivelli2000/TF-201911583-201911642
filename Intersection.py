@@ -1,5 +1,5 @@
 class Intersection:
-    def __init__(self, id, name, idBeginStreet, idEndStreet, idBeginInter, idEndInter, distance, velocity, cost1, cost2, latitudeStreet,longitudeStreet, latitudInter, longitudeInter ):
+    def __init__(self, id, name, idBeginStreet, idEndStreet, idBeginInter, idEndInter, distance, velocity, cost1, cost2, latitudeBeginInter,longitudeBeginInter, latitudEndInter, longitudeEndInter ):
         self.id = id
         self.name = name
         self.idBeginStreet = idBeginStreet
@@ -10,10 +10,10 @@ class Intersection:
         self.velocity = velocity
         self.cost1 = cost1
         self.cost2 = cost2
-        self.latitudeStreet = latitudeStreet
-        self.longitudeStreet = longitudeStreet
-        self.latitudeInter = latitudInter
-        self.longitudeInter = longitudeInter
+        self.latitudeBeginInter = latitudeBeginInter
+        self.longitudeBeginInter = longitudeBeginInter
+        self.latitudeEndInter = latitudEndInter
+        self.longitudeEndInter = longitudeEndInter
 
     def getName(self):
         return self.name
@@ -23,14 +23,14 @@ class Intersection:
         return self.idEndInter
     def getId(self):
         return self.id
-    def getIdBeginStreet(self):
-        return self.idBeginStreet
-    def getIdEndStreet(self):
-        return self.idEndStreet
-    def getLatitudeInter(self):
-        return self.latitudeInter
-    def getLongitudeInter(self):
-        return self.longitudeInter
+    def getLatitudeBeginInter(self):
+        return self.latitudeBeginInter
+    def getLongitudeBeginInter(self):
+        return self.longitudeBeginInter
+    def getLatitudeEndInter(self):
+        return self.latitudeEndInter
+    def getLongitudeEndInter(self):
+        return self.longitudeEndInter
     def getDistance(self):
         return self.distance
         

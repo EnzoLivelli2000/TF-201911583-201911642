@@ -1,6 +1,9 @@
 import heapq as hq
 import math
 import numpy as np
+import networkx as nx
+from graph import createGraph, createListAdjacency, getWeightsEdges, readData
+from helpers import createMap
 
 def dijkstraAlgorithm(G, s):
   n = len(G)
@@ -23,3 +26,17 @@ def dijkstraAlgorithm(G, s):
             hq.heappush(pqueue, (f, v))
 
   return path, cost
+
+def calculateShortestRouteBetweenTwoNodes(target):
+    graph = createGraph(100)
+    coordinates = []
+    path = nx.shortest_path(graph, source = 1, target = target, weight = "weight")
+    length = nx.shortest_path_length(graph, source = 1, target = target, weight = "weight")
+    for i in path:
+      lista = []
+      tuplaOne = (graph.nodes[i]["latitudeBegin"], graph.nodes[i]["longitudeBegin"])
+      tuplaTwo = (graph.nodes[i]["latitudeEnd"], graph.nodes[i]["longitudeEnd"])
+      lista.append(tuplaOne)
+      lista.append(tuplaTwo)
+      coordinates.append(lista)
+    createMap(coordinates)

@@ -1,5 +1,10 @@
 import random
 from math import sin, cos, sqrt, atan2, radians
+import folium
+import pandas as pd
+#import geopandas as gpd
+import numpy as np
+
 
 # This function generate a random color 
 def random_color():
@@ -25,3 +30,21 @@ def calculateDistanceBetweenTwoNodes(lat1, lon1, lat2, lon2):
 
     distance = R * c
     return distance
+
+def trafficFactor():
+    print("Hi")
+
+def createMap(lista):
+    m = folium.Map()
+    m.fit_bounds(lista)
+    m.save("mapa.html")
+    tooltip = "Haz click"
+    for x in range(10):
+        var = lista[x][0]
+        folium.Marker(lista[x][0], popup=var, tooltip=tooltip, icon=folium.Icon(color='red',icon='info-sign')).add_to(m)
+    m.save("mapa.html")
+    folium.PolyLine(
+        locations = lista,
+        popup = "Zona de paseo"
+    ).add_to(m)
+    m.save("mapa.html")
