@@ -1,0 +1,6 @@
+COMANNDS ->  conda env list 
+            conda create --name "ENV_NAME" 
+            conda active "ENV_NAME"
+            conda install -c conda-forge python=3.9 fiona shapely rasterio pyproj pandas jupyterlab
+
+cualquier consulta ver este video -> https://www.youtube.com/watch?v=ChNfVcMZrqU&list=WL&index=24&t=324s
