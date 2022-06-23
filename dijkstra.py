@@ -32,10 +32,11 @@ def calculateShortestRouteBetweenTwoNodes(target):
     coordinates = []
     path = nx.shortest_path(graph, source = 1, target = target, weight = "weight")
     length = nx.shortest_path_length(graph, source = 1, target = target, weight = "weight")
+    print(length)
     for i in path:
       lista = []
-      tuplaOne = (graph.nodes[i]["latitudeBegin"], graph.nodes[i]["longitudeBegin"])
-      tuplaTwo = (graph.nodes[i]["latitudeEnd"], graph.nodes[i]["longitudeEnd"])
+      tuplaOne = (float(graph.nodes[i]["latitudeBegin"]), float(graph.nodes[i]["longitudeBegin"]))
+      tuplaTwo = (float(graph.nodes[i]["latitudeEnd"]), float(graph.nodes[i]["longitudeEnd"]))
       lista.append(tuplaOne)
       lista.append(tuplaTwo)
       coordinates.append(lista)
