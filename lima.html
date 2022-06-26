@@ -1,0 +1,219 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 1000px;
+            height: 1000px;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:11px;
+            border:2px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+<div id="loadingBar">
+    <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+            <div id="bar"></div>
+        </div>
+    </div>
+</div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#474ab7", "id": "1", "label": "1", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "6", "label": "6", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "90275", "label": "90275", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "79", "label": "79", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "51668", "label": "51668", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "7", "label": "7", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "10", "label": "10", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "89757", "label": "89757", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "3473", "label": "3473", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "3472", "label": "3472", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#474ab7", "id": "2", "label": "2", "shape": "dot", "title": "Plaza 2 de Mayo"}, {"color": "#ac69ac", "id": "3", "label": "3", "shape": "dot", "title": "Plaza Ramon Castilla"}, {"color": "#ac69ac", "id": "4", "label": "4", "shape": "dot", "title": "Plaza Ramon Castilla"}, {"color": "#6c732e", "id": "20398", "label": "20398", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "89758", "label": "89758", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "25784", "label": "25784", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "25783", "label": "25783", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "3456", "label": "3456", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "10285", "label": "10285", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "20279", "label": "20279", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "2996", "label": "2996", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "61002", "label": "61002", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "51747", "label": "51747", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "93140", "label": "93140", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "90309", "label": "90309", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "10593", "label": "10593", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "20265", "label": "20265", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6c732e", "id": "8", "label": "8", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "9", "label": "9", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "90834", "label": "90834", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "90833", "label": "90833", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "51748", "label": "51748", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "10284", "label": "10284", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "20140", "label": "20140", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "20106", "label": "20106", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "10287", "label": "10287", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "20101", "label": "20101", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "20107", "label": "20107", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "20136", "label": "20136", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#0b1da2", "id": "20131", "label": "20131", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#c80ca1", "id": "11", "label": "11", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#c80ca1", "id": "65165", "label": "65165", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#c80ca1", "id": "26831", "label": "26831", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#c80ca1", "id": "37013", "label": "37013", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#c80ca1", "id": "12", "label": "12", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#75d7bc", "id": "13", "label": "13", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#75d7bc", "id": "15", "label": "15", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#a07c5b", "id": "16", "label": "16", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#2a2872", "id": "17", "label": "17", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "93168", "label": "93168", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "3765", "label": "3765", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "12773", "label": "12773", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "3451", "label": "3451", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "91660", "label": "91660", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "91696", "label": "91696", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "3725", "label": "3725", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "3726", "label": "3726", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "3729", "label": "3729", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "231", "label": "231", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "230", "label": "230", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#2a2872", "id": "20253", "label": "20253", "shape": "dot", "title": "Plaza Francisco Bolognesi"}, {"color": "#cbce1d", "id": "22", "label": "22", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#cbce1d", "id": "18", "label": "18", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#74dda5", "id": "19", "label": "19", "shape": "dot", "title": "Puente Del Ejercito"}, {"color": "#74dda5", "id": "20", "label": "20", "shape": "dot", "title": "Puente Del Ejercito"}, {"color": "#d7ee22", "id": "21", "label": "21", "shape": "dot", "title": "Puente Del Ejercito"}, {"color": "#31eeed", "id": "39036", "label": "39036", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "24", "label": "24", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "33935", "label": "33935", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20381", "label": "20381", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20480", "label": "20480", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20423", "label": "20423", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20540", "label": "20540", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "90804", "label": "90804", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20429", "label": "20429", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "31230", "label": "31230", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "40035", "label": "40035", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20930", "label": "20930", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20861", "label": "20861", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "42858", "label": "42858", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "94628", "label": "94628", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20907", "label": "20907", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "31491", "label": "31491", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "94637", "label": "94637", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "35587", "label": "35587", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20939", "label": "20939", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20887", "label": "20887", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20220", "label": "20220", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20889", "label": "20889", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20872", "label": "20872", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20867", "label": "20867", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20525", "label": "20525", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20822", "label": "20822", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20825", "label": "20825", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "40566", "label": "40566", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "20912", "label": "20912", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#31eeed", "id": "23", "label": "23", "shape": "dot", "title": "Vicente Morales Duarez"}, {"color": "#0d7c5a", "id": "25", "label": "25", "shape": "dot", "title": "Alfonso Ugarte"}, {"color": "#6d513e", "id": "26", "label": "26", "shape": "dot", "title": "Circunvalacion"}, {"color": "#6d513e", "id": "29", "label": "29", "shape": "dot", "title": "Circunvalacion"}, {"color": "#6d513e", "id": "30610", "label": "30610", "shape": "dot", "title": "Circunvalacion"}, {"color": "#6d513e", "id": "27", "label": "27", "shape": "dot", "title": "Circunvalacion"}, {"color": "#e8daea", "id": "94626", "label": "94626", "shape": "dot", "title": "Avenida Caqueta"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "1", "title": 0.03481065625927481, "to": "6"}, {"arrows": "to", "from": "6", "title": 0.003892688848427286, "to": "90275"}, {"arrows": "to", "from": "90275", "title": 0.017947818559749425, "to": "79"}, {"arrows": "to", "from": "79", "title": 0.036830214990765595, "to": "51668"}, {"arrows": "to", "from": "51668", "title": 0.010352544691478841, "to": "7"}, {"arrows": "to", "from": "7", "title": 0.0592397334074888, "to": "10"}, {"arrows": "to", "from": "10", "title": 0.02227518484153729, "to": "89757"}, {"arrows": "to", "from": "89757", "title": 0.007642168605748477, "to": "3473"}, {"arrows": "to", "from": "3473", "title": 0.02809400436727254, "to": "3472"}, {"arrows": "to", "from": "3472", "title": 0.037851118240274505, "to": "2"}, {"arrows": "to", "from": "2", "title": 0.01857479497837613, "to": "1"}, {"arrows": "to", "from": "3", "title": 0.03230258665630871, "to": "4"}, {"arrows": "to", "from": "7", "title": 0.10702422621237653, "to": "20398"}, {"arrows": "to", "from": "20398", "title": 0.06355369064165713, "to": "89758"}, {"arrows": "to", "from": "89758", "title": 0.10096816240427733, "to": "25784"}, {"arrows": "to", "from": "25784", "title": 0.15500193525174732, "to": "25783"}, {"arrows": "to", "from": "25783", "title": 0.03737942786435633, "to": "3456"}, {"arrows": "to", "from": "3456", "title": 0.12551109605550353, "to": "10285"}, {"arrows": "to", "from": "10285", "title": 0.16459177511671846, "to": "20279"}, {"arrows": "to", "from": "20279", "title": 0.11937315068636153, "to": "2996"}, {"arrows": "to", "from": "2996", "title": 0.10445391831128106, "to": "61002"}, {"arrows": "to", "from": "61002", "title": 0.08782586607513214, "to": "51747"}, {"arrows": "to", "from": "51747", "title": 0.06008185645602648, "to": "93140"}, {"arrows": "to", "from": "93140", "title": 0.04773837464600854, "to": "90309"}, {"arrows": "to", "from": "90309", "title": 0.098855159632535, "to": "10593"}, {"arrows": "to", "from": "10593", "title": 0.07145120146393477, "to": "20265"}, {"arrows": "to", "from": "20265", "title": 0.11574011815927035, "to": "8"}, {"arrows": "to", "from": "9", "title": 0.1667429917854742, "to": "90834"}, {"arrows": "to", "from": "90834", "title": 0.01173216974312111, "to": "90833"}, {"arrows": "to", "from": "90833", "title": 0.21596598284243987, "to": "51748"}, {"arrows": "to", "from": "51748", "title": 0.1931274674671746, "to": "10284"}, {"arrows": "to", "from": "10284", "title": 0.23024874141046459, "to": "20140"}, {"arrows": "to", "from": "20140", "title": 0.064442997178098, "to": "20106"}, {"arrows": "to", "from": "20106", "title": 0.10924252709556487, "to": "10287"}, {"arrows": "to", "from": "10287", "title": 0.07842606836706474, "to": "20101"}, {"arrows": "to", "from": "20101", "title": 0.07157652575777068, "to": "20107"}, {"arrows": "to", "from": "20107", "title": 0.13457039843404234, "to": "20136"}, {"arrows": "to", "from": "20136", "title": 0.06391928039729208, "to": "20131"}, {"arrows": "to", "from": "20131", "title": 0.11356020334984261, "to": "10"}, {"arrows": "to", "from": "11", "title": 0.14418632501851958, "to": "65165"}, {"arrows": "to", "from": "65165", "title": 0.021557851519270407, "to": "26831"}, {"arrows": "to", "from": "26831", "title": 0.016186949395753332, "to": "37013"}, {"arrows": "to", "from": "37013", "title": 0.1022548547008828, "to": "12"}, {"arrows": "to", "from": "13", "title": 0.2839062357768378, "to": "15"}, {"arrows": "to", "from": "16", "title": 0.2840657921449896, "to": "12"}, {"arrows": "to", "from": "17", "title": 0.012720567362212856, "to": "93168"}, {"arrows": "to", "from": "93168", "title": 0.010636910909515756, "to": "8"}, {"arrows": "to", "from": "8", "title": 0.03923311628003211, "to": "3765"}, {"arrows": "to", "from": "3765", "title": 0.014879466765277996, "to": "12773"}, {"arrows": "to", "from": "12773", "title": 0.05295203790114948, "to": "3451"}, {"arrows": "to", "from": "3451", "title": 0.008709046059511687, "to": "91660"}, {"arrows": "to", "from": "91660", "title": 0.006510948028468283, "to": "91696"}, {"arrows": "to", "from": "91696", "title": 0.007770096332798082, "to": "3725"}, {"arrows": "to", "from": "3725", "title": 0.04500556528727628, "to": "3726"}, {"arrows": "to", "from": "3726", "title": 0.015108582283665567, "to": "3729"}, {"arrows": "to", "from": "3729", "title": 0.045354772589450865, "to": "231"}, {"arrows": "to", "from": "231", "title": 0.023551736138494074, "to": "230"}, {"arrows": "to", "from": "230", "title": 0.037320376849829036, "to": "20253"}, {"arrows": "to", "from": "20253", "title": 0.02221313066282185, "to": "9"}, {"arrows": "to", "from": "9", "title": 0.012287473328493217, "to": "17"}, {"arrows": "to", "from": "12", "title": 0.03284544524502643, "to": "22"}, {"arrows": "to", "from": "22", "title": 0.07439957276845599, "to": "18"}, {"arrows": "to", "from": "19", "title": 0.09748356759111877, "to": "20"}, {"arrows": "to", "from": "20", "title": 0.10986418146499853, "to": "13"}, {"arrows": "to", "from": "18", "title": 0.09794638623347038, "to": "21"}, {"arrows": "to", "from": "22", "title": 0.1102238845926586, "to": "39036"}, {"arrows": "to", "from": "39036", "title": 0.04440524304540285, "to": "24"}, {"arrows": "to", "from": "24", "title": 0.16016286626009069, "to": "33935"}, {"arrows": "to", "from": "33935", "title": 0.08720905648325218, "to": "20381"}, {"arrows": "to", "from": "20381", "title": 0.0389965573536039, "to": "20480"}, {"arrows": "to", "from": "20480", "title": 0.030543726400042027, "to": "20423"}, {"arrows": "to", "from": "20423", "title": 0.027768503361783537, "to": "20540"}, {"arrows": "to", "from": "20540", "title": 0.008205440582969892, "to": "90804"}, {"arrows": "to", "from": "90804", "title": 0.02839031525895493, "to": "20429"}, {"arrows": "to", "from": "20429", "title": 0.024058014678047617, "to": "31230"}, {"arrows": "to", "from": "31230", "title": 0.10524905405808978, "to": "40035"}, {"arrows": "to", "from": "40035", "title": 0.03784464803655741, "to": "20930"}, {"arrows": "to", "from": "20930", "title": 0.0970651707045584, "to": "20861"}, {"arrows": "to", "from": "20861", "title": 0.04105229250565291, "to": "42858"}, {"arrows": "to", "from": "42858", "title": 0.03994471528000478, "to": "94628"}, {"arrows": "to", "from": "94628", "title": 0.041065636392248854, "to": "20907"}, {"arrows": "to", "from": "20907", "title": 0.016239283843535936, "to": "31491"}, {"arrows": "to", "from": "31491", "title": 0.013560596628137613, "to": "94637"}, {"arrows": "to", "from": "94637", "title": 0.035587859936741045, "to": "35587"}, {"arrows": "to", "from": "35587", "title": 0.01975872394850514, "to": "20939"}, {"arrows": "to", "from": "20939", "title": 0.31163608224299505, "to": "20887"}, {"arrows": "to", "from": "20887", "title": 0.11611862362752876, "to": "20220"}, {"arrows": "to", "from": "20220", "title": 0.13332919429419637, "to": "20889"}, {"arrows": "to", "from": "20889", "title": 0.12246166833710184, "to": "20872"}, {"arrows": "to", "from": "20872", "title": 0.033509866800692886, "to": "20867"}, {"arrows": "to", "from": "20867", "title": 0.1308227513660335, "to": "20525"}, {"arrows": "to", "from": "20525", "title": 0.12414416468841549, "to": "20822"}, {"arrows": "to", "from": "20822", "title": 0.0841797733769549, "to": "20825"}, {"arrows": "to", "from": "20825", "title": 0.056121187933703194, "to": "40566"}, {"arrows": "to", "from": "40566", "title": 0.02758687602604842, "to": "20912"}, {"arrows": "to", "from": "20912", "title": 0.09930347738354035, "to": "23"}, {"arrows": "to", "from": "24", "title": 0.23897538214531908, "to": "25"}, {"arrows": "to", "from": "26", "title": 0.05790535746324079, "to": "29"}, {"arrows": "to", "from": "29", "title": 0.049400393167544944, "to": "30610"}, {"arrows": "to", "from": "30610", "title": 0.04421750390047951, "to": "27"}, {"arrows": "to", "from": "21", "title": 0.04403349300747849, "to": "94626"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

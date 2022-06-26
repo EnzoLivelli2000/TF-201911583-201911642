@@ -24,7 +24,6 @@ def dijkstraAlgorithm(G, s):
             cost[v] = f
             path[v] = u
             hq.heappush(pqueue, (f, v))
-
   return path, cost
 
 def calculateShortestRouteBetweenTwoNodes(target):
